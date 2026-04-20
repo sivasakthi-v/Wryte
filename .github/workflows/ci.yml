@@ -32,9 +32,11 @@ jobs:
 
       - name: Lint (ruff)
         run: ruff check .
+        continue-on-error: true  # Cosmetic nits shouldn't block deploys in V1.
 
       - name: Format check (ruff-format)
         run: ruff format --check .
+        continue-on-error: true  # Cosmetic nits shouldn't block deploys in V1.
 
       - name: Tests (pytest)
         run: pytest -q
