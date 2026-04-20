@@ -222,7 +222,7 @@ class AnalyzeRequest(BaseModel):
     )
 
     @model_validator(mode="after")
-    def _require_some_input(self) -> "AnalyzeRequest":
+    def _require_some_input(self) -> AnalyzeRequest:
         chunks = [self.document_html, self.text]
         if not any(chunk and chunk.strip() for chunk in chunks):
             raise ValueError("At least one of document_html or text must be non-empty.")

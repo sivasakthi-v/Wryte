@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from fastapi import APIRouter
 
@@ -332,12 +332,12 @@ async def analyze(payload: AnalyzeRequest) -> AnalyzeResponse:
     r = analyze_readability(text)
 
     buckets = _stub_buckets(doc, r.score, r.summary)
-    overall = int(round(sum(b.weighted_points for b in buckets)))
+    overall = round(sum(b.weighted_points for b in buckets))
 
     return AnalyzeResponse(
         id=str(uuid.uuid4()),
         scoring_version=settings.scoring_version,
-        created_at=datetime.now(timezone.utc),
+        created_at=datetime.now(UTC),
         overall_score=overall,
         confidence=0.45,
         verdict=_verdict_for(overall),
