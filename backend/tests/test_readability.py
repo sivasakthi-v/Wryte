@@ -4,11 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from app.bucket.readability import (
-    HAS_TEXTSTAT,
-    ReadabilityResult,
-    analyze_readability,
-)
+from app.bucket.readability import HAS_TEXTSTAT, ReadabilityResult, analyze_readability
 
 
 PLAIN_ENGLISH = (
