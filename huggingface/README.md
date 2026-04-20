@@ -12,7 +12,7 @@ short_description: Diagnostic scoring backend for the Wryte dashboard.
 
 # Wryte API (Hugging Face Space)
 
-This Space hosts the FastAPI backend + LanguageTool grammar server for the [Wryte](https://github.com/CHANGE_ME/wryte) Content Intelligence Dashboard.
+This Space hosts the FastAPI backend + LanguageTool grammar server for the [Wryte](https://github.com/sivasakthi-v/Wryte) Content Intelligence Dashboard.
 
 The container runs two processes: the LanguageTool Java server on port 8010 (internal) and FastAPI on port 7860 (exposed by HF Spaces).
 

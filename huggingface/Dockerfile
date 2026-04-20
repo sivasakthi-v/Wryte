@@ -53,9 +53,12 @@ COPY huggingface/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # HF Spaces require the app to listen on port 7860.
+# CORS is left empty here because the FastAPI middleware already regex-matches
+# any *.netlify.app subdomain. If you later attach a custom domain, add it
+# as a comma-separated list here (e.g. "https://wryte.example.com").
 ENV PORT=7860 \
     LANGUAGETOOL_URL=http://localhost:8010/v2 \
-    CORS_ALLOW_ORIGINS="https://CHANGE_ME.netlify.app"
+    CORS_ALLOW_ORIGINS=""
 
 EXPOSE 7860
 

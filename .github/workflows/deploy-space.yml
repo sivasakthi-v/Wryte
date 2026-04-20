@@ -40,6 +40,8 @@ jobs:
           mkdir -p /tmp/space/backend
           cp -r backend/app /tmp/space/backend/app
           cp backend/pyproject.toml /tmp/space/backend/pyproject.toml
+          # pyproject.toml declares README.md as the project readme, so it must ship too.
+          cp backend/README.md /tmp/space/backend/README.md
           # Mirror the Dockerfile's expected structure.
           mkdir -p /tmp/space/huggingface
           cp huggingface/entrypoint.sh /tmp/space/huggingface/entrypoint.sh

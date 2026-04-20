@@ -1,25 +1,24 @@
 [build]
   base = "frontend"
-  command = "pnpm build"
+  command = "npm run build"
   publish = "frontend/.next"
 
 [build.environment]
   NODE_VERSION = "20"
-  PNPM_VERSION = "9"
   NEXT_TELEMETRY_DISABLED = "1"
 
 # Next.js plugin handles SSR/ISR routing on Netlify.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Example env var (set the real value in Netlify dashboard, not here):
-#   NEXT_PUBLIC_API_URL = "https://<your-username>-wryte.hf.space"
+# API base URL points at the Hugging Face Space runtime for the Wryte backend.
+# Override per-context in the Netlify dashboard if you later move the API elsewhere.
 
 [context.production.environment]
-  NEXT_PUBLIC_API_URL = "https://CHANGE_ME.hf.space"
+  NEXT_PUBLIC_API_URL = "https://sivaserafino-wryte.hf.space"
 
 [context.deploy-preview.environment]
-  NEXT_PUBLIC_API_URL = "https://CHANGE_ME.hf.space"
+  NEXT_PUBLIC_API_URL = "https://sivaserafino-wryte.hf.space"
 
 [context.branch-deploy.environment]
-  NEXT_PUBLIC_API_URL = "https://CHANGE_ME.hf.space"
+  NEXT_PUBLIC_API_URL = "https://sivaserafino-wryte.hf.space"
