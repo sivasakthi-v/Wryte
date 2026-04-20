@@ -1,7 +1,8 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = "frontend/.next"
+  # Publish path is relative to `base`, so ".next" resolves to frontend/.next.
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
