@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# Node / pnpm
+node_modules/
+.pnpm-store/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.local.example
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.recommended.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / dist
+dist/
+build/
+
+# Docker
+.docker/
+
+# Local data
+data/
+storage/
+
+# spaCy / HF model cache (only when running outside Docker)
+.cache/
+hf_cache/

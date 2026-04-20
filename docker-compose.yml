@@ -1,0 +1,55 @@
+services:
+  languagetool:
+    image: erikvl87/languagetool:latest
+    container_name: wryte-languagetool
+    ports:
+      - "${LANGUAGETOOL_PORT:-8010}:8010"
+    environment:
+      - Java_Xms=256m
+      - Java_Xmx=1g
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8010/v2/languages > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wryte-api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    environment:
+      - LANGUAGETOOL_URL=http://languagetool:8010/v2
+      - CORS_ALLOW_ORIGINS=${CORS_ALLOW_ORIGINS:-http://localhost:3000}
+      - SCORING_VERSION=${SCORING_VERSION:-v1}
+    depends_on:
+      languagetool:
+        condition: service_started
+    volumes:
+      - ./backend/app:/app/app
+      - api-data:/app/data
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: wryte-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - api
+    command: pnpm dev
+
+volumes:
+  api-data:
